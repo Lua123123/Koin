@@ -1,5 +1,7 @@
 package com.example.retrofitgetkotlin.Fragment
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +20,11 @@ class CallApi : Fragment() {
     var txtWoeid: TextView? = null
     var txtLatlng: TextView? = null
     var btnCallapi: Button? = null
+    var btnSave: Button? = null
+    var btnClear: Button? = null
+
+    //shared_preference
+    var sharedPreferences: SharedPreferences? = null
 
     val mainViewModel: MainViewModel by sharedViewModel()
 
@@ -48,8 +55,40 @@ class CallApi : Fragment() {
         txtWoeid = view.findViewById(R.id.txtWoeid)
         txtLatlng = view.findViewById(R.id.txtLatlng)
         btnCallapi = view.findViewById(R.id.btnCallapi)
+        btnClear = view.findViewById(R.id.btnClear)
+        btnSave = view.findViewById(R.id.btnSave)
+
+        sharedPreferences = this.activity!!.getSharedPreferences("data", Context.MODE_PRIVATE)
+
         btnCallapi?.setOnClickListener(View.OnClickListener {
                 item: View? -> mainViewModel!!.mutableLiveDataClickCallApi() })
+
+        btnSave?.setOnClickListener(View.OnClickListener {
+            var editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+            val title = txtTitle?.getText().toString().trim()
+            val locationtype = txtLocationtype?.getText().toString().trim()
+            val woeid = txtWoeid?.getText().toString().trim()
+            val latlng = txtLatlng?.getText().toString().trim()
+            editor?.putString("title", title)
+            editor?.putString("locationtype", locationtype)
+            editor?.putString("woeid", woeid)
+            editor?.putString("latlng", latlng)
+            editor?.commit()
+        })
+
+        txtTitle?.setText(sharedPreferences?.getString("title", ""))
+        txtLocationtype?.setText(sharedPreferences?.getString("locationtype", ""))
+        txtWoeid?.setText(sharedPreferences?.getString("woeid", ""))
+        txtLatlng?.setText(sharedPreferences?.getString("latlng", ""))
+
+        btnClear?.setOnClickListener(View.OnClickListener {
+            var editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+            editor?.remove("title")
+            editor?.remove("locationtype")
+            editor?.remove("woeid")
+            editor?.remove("latlng")
+            editor?.commit()
+        })
 
 
         mainViewModel.mWeathers.observe(this, Observer {

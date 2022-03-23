@@ -6,6 +6,7 @@ import com.example.retrofitgetkotlin.API.APIPost
 import com.example.retrofitgetkotlin.Koin.KoinRepository
 import com.example.retrofitgetkotlin.model.User
 import com.example.retrofitgetkotlin.model.Weather
+import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback

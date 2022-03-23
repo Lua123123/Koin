@@ -1,6 +1,7 @@
 package com.example.retrofitgetkotlin.Koin
 
-import com.example.retrofitgetkotlin.model.User
+import com.example.retrofitgetkotlin.model.Engineer
+import com.example.retrofitgetkotlin.model.Motor
 import com.example.retrofitgetkotlin.viewmodel.MainViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -58,5 +59,16 @@ val viewModelModule = module {
         MainViewModel(get())
     }
 }
+
+val motorEngineer = module {
+    single {
+        Motor(get())
+    }
+
+    factory {
+        Engineer()
+    }
+}
+
 
 

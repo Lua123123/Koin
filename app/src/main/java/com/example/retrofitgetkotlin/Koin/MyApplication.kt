@@ -17,7 +17,7 @@ class MyApplication : Application() {
         startKoin {
             androidLogger(if (BuildConfig.DEBUG) org.koin.core.logger.Level.ERROR else org.koin.core.logger.Level.NONE)
             androidContext(this@MyApplication)
-            modules(listOf(repositoryModule, callApi, koinRepository, viewModelModule))
+            modules(listOf(repositoryModule, callApi, koinRepository, viewModelModule, motorEngineer))
         }
     }
 }

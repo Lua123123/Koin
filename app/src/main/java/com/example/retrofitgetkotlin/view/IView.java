@@ -1,4 +1,4 @@
-package com.example.retrofitgetkotlin.View;
+package com.example.retrofitgetkotlin.view;
 
 import com.example.retrofitgetkotlin.model.User;
 import com.example.retrofitgetkotlin.model.Weather;
